@@ -26,9 +26,13 @@ class Window(QtWidgets.QMainWindow):
         self.ui.cBoxCategory.addItems(categories)
 
     def addCategory(self):
-        # print(type(self.ui.leAddCategory.text()))
         name = self.ui.leAddCategory.text()
-        self.db.addCategory(name)
+        if name == "":
+            # message box
+            pass
+        else:
+            self.db.addCategory(name)
+            self.ui.cBoxCategory.addItem(name)
 
     def loadProducts(self):
         products = []

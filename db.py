@@ -10,10 +10,9 @@ class Db:
         return self.cursor.fetchall()
 
     def addCategory(self,name):
-        sql = "INSERT INTO category(name) VALUES (%s,)" 
-        values = tuple(name)
-        print(type(values))
-        self.cursor.execute(sql,values)
+        sql = f"INSERT INTO category(name) VALUES ('{name}');" 
+        self.cursor.execute(sql)
+        self.connection.commit()
 
     def loadProducts(self):
         self.cursor.execute("select p.id, p.brand, p.model, p.price, c.name from products as p inner join category as c on p.categoryId = c.id")
