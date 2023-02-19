@@ -1,2 +1,1 @@
-ucts())
-        # self.ui.tableProducts.
+r join category as c on p.categoryId = c.id")

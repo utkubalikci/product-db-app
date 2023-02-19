@@ -13,7 +13,7 @@ class Db:
         self.cursor.execute("")
 
     def loadProducts(self):
-        self.cursor.execute("select * from products")
+        self.cursor.execute("select p.id, p.brand, p.model, p.price, c.name from products as p inner join category as c on p.categoryId = c.id")
         return self.cursor.fetchall()
         
     def closeDb(self):
