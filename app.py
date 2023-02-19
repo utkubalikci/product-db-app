@@ -30,21 +30,23 @@ class Window(QtWidgets.QMainWindow):
         print(products)
 
 
-        # self.ui.tableProducts.setRowCount(len(products))
-        # self.ui.tableProducts.setColumnCount(5)
-        # self.ui.tableProducts.setHorizontalHeaderLabels(('id','brand','model','price','categoryId'))
-        # self.ui.tableProducts.setColumnWidth(0,200)
-        # self.ui.tableProducts.setColumnWidth(1,100)
+        self.ui.tableProducts.setRowCount(len(products))
+        self.ui.tableProducts.setColumnCount(5)
+        self.ui.tableProducts.setHorizontalHeaderLabels(('id','brand','model','price','category'))
+        self.ui.tableProducts.setColumnWidth(0,10)
+        self.ui.tableProducts.setColumnWidth(1,50)
+        self.ui.tableProducts.setColumnWidth(2,50)
+        self.ui.tableProducts.setColumnWidth(3,50)
+        self.ui.tableProducts.setColumnWidth(4,50)
+        rowIndex = 0
+        for product in products:
+            self.ui.tableProducts.setItem(rowIndex,0, QTableWidgetItem(str(product['id'])))
+            self.ui.tableProducts.setItem(rowIndex,1, QTableWidgetItem(product['brand']))
+            self.ui.tableProducts.setItem(rowIndex,2, QTableWidgetItem(product['model']))
+            self.ui.tableProducts.setItem(rowIndex,3, QTableWidgetItem(str(product['price'])))
+            self.ui.tableProducts.setItem(rowIndex,4, QTableWidgetItem(product['category']))
+            rowIndex+=1
 
-        # rowIndex = 0
-        # for product in products:
-        #     self.ui.tableProducts.setItem(rowIndex,0, QTableWidgetItem(product['name']))
-        #     self.ui.tableProducts.setItem(rowIndex,1, QTableWidgetItem(str(product['price'])))
-            
-        #     rowIndex+=1
-
-
-        # self.ui.tableProducts.
 
 
 def app():
