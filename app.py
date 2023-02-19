@@ -24,11 +24,11 @@ class Window(QtWidgets.QMainWindow):
         self.ui.cBoxCategory.addItems(categories)
 
     def loadProducts(self):
-        print(self.db.loadProducts())
-        # products = []
-        # for i in self.db.loadProducts():
-        #     products.append({'id':i[0],'brand':i[1],'model':i[2],'price':i[3],'categoryId':i[4]})
-        # print(products)
+        products = []
+        for i in self.db.loadProducts():
+            products.append({'id':i[0],'brand':i[1],'model':i[2],'price':i[3],'category':i[4]})
+        print(products)
+
 
         # self.ui.tableProducts.setRowCount(len(products))
         # self.ui.tableProducts.setColumnCount(5)

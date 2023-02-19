@@ -1,1 +1,0 @@
-r join category as c on p.categoryId = c.id")

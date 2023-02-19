@@ -174,7 +174,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="tableProducts"/>
+        <widget class="QTableWidget" name="tableWidget"/>
        </item>
       </layout>
      </item>
