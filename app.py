@@ -13,7 +13,19 @@ class Window(QtWidgets.QMainWindow):
         self.ui.setupUi(self)    
         self.db = Db()
         self.ui.btnSaveCategory.clicked.connect(self.addCategory)
+        self.ui.btnEdit.clicked.connect(self.edit)
+        self.ui.btnAdd.clicked.connect(self.addProduct)
         self.loadDb()
+
+    def addProduct(self):
+        brand = self.ui.leBrand.text()
+        model = self.ui.leModel.text()
+        price = self.ui.lePrice.text()
+        category = self.ui.cBoxCategory.currentText()
+        print(brand,model,price,category)
+
+    def edit():
+        pass
 
     def loadDb(self):
         self.loadCategories()
