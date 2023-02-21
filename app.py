@@ -13,7 +13,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui.setupUi(self)    
         self.db = Db()
         self.isEdit = False
-        self.editId
+        self.editId = -1
         self.ui.btnSaveCategory.clicked.connect(self.addCategory)
         self.ui.btnEdit.clicked.connect(self.edit)
         self.ui.btnSave.clicked.connect(self.save)
@@ -21,8 +21,13 @@ class Window(QtWidgets.QMainWindow):
         self.ui.btnAdd.clicked.connect(self.addProduct)
         self.loadDb()
 
+    def selectedItem(self):
+        row = self.ui.tableProducts.selectedItems()[0].row()
+        id = self.ui.tableProducts.item(row,0).text()
+        return int(id)
+
     def delete(self):
-        pass
+        self.selectedItem()
 
     def addProduct(self):
         brand = self.ui.leBrand.text()
