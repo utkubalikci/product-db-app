@@ -34,7 +34,9 @@ class Window(QtWidgets.QMainWindow):
         if id == -1:
             return
         else:
+            row = self.ui.tableProducts.selectedItems()[0].row()
             self.db.deleteById(id)
+            self.ui.tableProducts.removeRow(row)
         #message box
 
     def addProduct(self):
