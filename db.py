@@ -19,6 +19,11 @@ class Db:
         self.cursor.execute(sql)
         return self.cursor.fetchone()[0]
 
+    def editProduct(self,id,brand,model,price,category):
+        sql = f"update products set brand = '{brand}',model = '{model}',price = {price},categoryId = {self.categoryId(category)} where id = {id}"
+        self.cursor.execute(sql)
+        self.connection.commit()
+
     def productId(self,brand,model,price,categoryId):
         sql = f"select id from products where brand = '{brand}' and model = '{model}' and price = {price} and categoryID = {categoryId};"
         self.cursor.execute(sql)

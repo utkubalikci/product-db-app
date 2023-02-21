@@ -16,8 +16,8 @@ class Window(QtWidgets.QMainWindow):
         self.editId = -1
         self.ui.btnSaveCategory.clicked.connect(self.addCategory)
         self.ui.btnEdit.clicked.connect(self.edit)
-        self.ui.btnSave.clicked.connect(self.save)
         self.ui.btnDelete.clicked.connect(self.delete)
+        self.ui.btnSave.clicked.connect(self.save)
         self.ui.btnAdd.clicked.connect(self.addProduct)
         self.loadDb()
 
@@ -40,6 +40,7 @@ class Window(QtWidgets.QMainWindow):
         #message box
 
     def addProduct(self):
+        self.editId = -1
         brand = self.ui.leBrand.text()
         model = self.ui.leModel.text()
         price = self.ui.lePrice.text()
@@ -51,10 +52,25 @@ class Window(QtWidgets.QMainWindow):
         self.addTable(product=product)
 
     def save(self):
-        pass
+        if self.editId != -1:
+            brand = self.ui.leBrand.text()
+            model = self.ui.leModel.text()
+            price = self.ui.lePrice.text()
+            category = self.ui.cBoxCategory.currentText()
+            self.db.editProduct(self.editId,brand,model,price,category)
+            
+        
 
     def edit(self):
-        pass
+        self.editId = self.selectedItem()
+        if self.editId != -1:
+            row = self.ui.tableProducts.selectedItems()[0].row()
+            self.ui.leBrand.setText(self.ui.tableProducts.item(row,1).text())
+            self.ui.leModel.setText(self.ui.tableProducts.item(row,2).text())
+            self.ui.lePrice.setText(self.ui.tableProducts.item(row,3).text())
+            # self.ui.cBoxCategory.selected
+            # print(self.ui.cBoxCategory.currentText())
+
 
     def loadDb(self):
         self.loadCategories()
