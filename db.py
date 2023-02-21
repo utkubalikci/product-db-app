@@ -24,6 +24,11 @@ class Db:
         self.cursor.execute(sql)
         return self.cursor.fetchone()[0]
 
+    def deleteById(self,id):
+        sql = f"delete from products where id = {id};"
+        self.cursor.execute(sql)
+        self.connection.commit()
+
     def addProduct(self,brand,model,price,category):
         categoryId = self.categoryId(category)
         sql = f"INSERT INTO products(brand,model,price,categoryId) VALUES ('{brand}','{model}',{price},{categoryId});"

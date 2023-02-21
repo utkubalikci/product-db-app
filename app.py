@@ -22,12 +22,20 @@ class Window(QtWidgets.QMainWindow):
         self.loadDb()
 
     def selectedItem(self):
-        row = self.ui.tableProducts.selectedItems()[0].row()
-        id = self.ui.tableProducts.item(row,0).text()
-        return int(id)
+        try:
+            row = self.ui.tableProducts.selectedItems()[0].row()
+            id = self.ui.tableProducts.item(row,0).text()
+            return int(id)
+        except:
+            return -1
 
     def delete(self):
-        self.selectedItem()
+        id = self.selectedItem()
+        if id == -1:
+            return
+        else:
+            self.db.deleteById(id)
+        #message box
 
     def addProduct(self):
         brand = self.ui.leBrand.text()
