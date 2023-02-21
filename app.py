@@ -22,7 +22,11 @@ class Window(QtWidgets.QMainWindow):
         model = self.ui.leModel.text()
         price = self.ui.lePrice.text()
         category = self.ui.cBoxCategory.currentText()
-        print(brand,model,price,category)
+        id = self.db.addProduct(brand=brand,model=model,price=price,category=category)
+
+        product = {'id':id,'brand':brand,'model':model,'price':price,'category':category}
+        self.setRowTable()
+        self.addTable(product=product)
 
     def edit():
         pass
@@ -62,6 +66,9 @@ class Window(QtWidgets.QMainWindow):
 
         for product in products:
             self.addTable(product)
+
+    def setRowTable(self):
+        self.ui.tableProducts.setRowCount(self.rowIndex + 1)
 
     def addTable(self,product):
         self.ui.tableProducts.setItem(self.rowIndex,0, QTableWidgetItem(str(product['id'])))
