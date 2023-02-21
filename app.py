@@ -12,10 +12,17 @@ class Window(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)    
         self.db = Db()
+        self.isEdit = False
+        self.editId
         self.ui.btnSaveCategory.clicked.connect(self.addCategory)
         self.ui.btnEdit.clicked.connect(self.edit)
+        self.ui.btnSave.clicked.connect(self.save)
+        self.ui.btnDelete.clicked.connect(self.delete)
         self.ui.btnAdd.clicked.connect(self.addProduct)
         self.loadDb()
+
+    def delete(self):
+        pass
 
     def addProduct(self):
         brand = self.ui.leBrand.text()
@@ -28,7 +35,10 @@ class Window(QtWidgets.QMainWindow):
         self.setRowTable()
         self.addTable(product=product)
 
-    def edit():
+    def save(self):
+        pass
+
+    def edit(self):
         pass
 
     def loadDb(self):
