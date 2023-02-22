@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QMessageBox
 from _product import Ui_MainWindow
 from db import Db
 import sys
@@ -29,6 +30,10 @@ class Window(QtWidgets.QMainWindow):
         except:
             return -1
 
+    def msgboxCategory(self):
+        QMessageBox.question(self, 'Error', 'Please enter a category name.', QMessageBox.Ok)
+        
+
     def delete(self):
         id = self.selectedItem()
         if id == -1:
@@ -45,11 +50,13 @@ class Window(QtWidgets.QMainWindow):
         model = self.ui.leModel.text()
         price = self.ui.lePrice.text()
         category = self.ui.cBoxCategory.currentText()
-        id = self.db.addProduct(brand=brand,model=model,price=price,category=category)
-
-        product = {'id':id,'brand':brand,'model':model,'price':price,'category':category}
-        self.setRowTable()
-        self.addTable(product=product)
+        if brand == "" or model == "" or category == "":
+            QMessageBox.question(self, 'Error', 'Please check your inputs.', QMessageBox.Ok)
+        else:
+            id = self.db.addProduct(brand=brand,model=model,price=price,category=category)
+            product = {'id':id,'brand':brand,'model':model,'price':price,'category':category}
+            self.setRowTable()
+            self.addTable(product=product)
 
     def save(self):
         if self.editId != -1:
@@ -57,7 +64,10 @@ class Window(QtWidgets.QMainWindow):
             model = self.ui.leModel.text()
             price = self.ui.lePrice.text()
             category = self.ui.cBoxCategory.currentText()
-            self.db.editProduct(self.editId,brand,model,price,category)
+            if brand == "" or model == "" or category == "":
+                QMessageBox.question(self, 'Error', 'Please check your inputs.', QMessageBox.Ok)
+            else:
+                self.db.editProduct(self.editId,brand,model,price,category)
             
         
 
@@ -68,8 +78,7 @@ class Window(QtWidgets.QMainWindow):
             self.ui.leBrand.setText(self.ui.tableProducts.item(row,1).text())
             self.ui.leModel.setText(self.ui.tableProducts.item(row,2).text())
             self.ui.lePrice.setText(self.ui.tableProducts.item(row,3).text())
-            # self.ui.cBoxCategory.selected
-            # print(self.ui.cBoxCategory.currentText())
+            # change selected category cbox item
 
 
     def loadDb(self):
@@ -85,8 +94,7 @@ class Window(QtWidgets.QMainWindow):
     def addCategory(self):
         name = self.ui.leAddCategory.text()
         if name == "":
-            # message box
-            pass
+            self.msgboxCategory()
         else:
             self.db.addCategory(name)
             self.ui.cBoxCategory.addItem(name)
